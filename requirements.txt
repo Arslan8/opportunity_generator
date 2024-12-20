@@ -1,0 +1,6 @@
+AHRS==0.3.1
+ipython==8.12.3
+numpy==2.2.0
+pandas==2.2.3
+pyserial==3.5
+scikit_learn==1.6.0
