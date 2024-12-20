@@ -3,12 +3,24 @@ import time
 import numpy as np
 from ahrs.filters import Madgwick
 
-
+location=["BACK", "RUA", "RLA", "LUA", "LLA"]
+idx =    [38, 51, 64, 77, 90]
+port = input("Enter port of your device: [Default is /dev/ttyACM0]")
+if not port:
+    port = '/dev/ttyACM0'
+baudrate = input("Enter buadrate of your device: [Default is 115200]")
+if not baudrate:
+    baudrate = 115200
+else:
+	baudrate = int(baudrate)
+sensor_loc = input("Enter location of sensor. \nPossible Values: " + str(location) +"\n[Default is Right Lower Arm(RLA)]:")
+if not sensor_loc:
+	sensor_loc = "RLA"
 
 # Configure the serial port
 ser = serial.Serial(
-    port='/dev/ttyACM0',         # Replace with your port name (e.g., '/dev/ttyUSB0' on Linux)
-    baudrate=115200,       # Set the baud rate (must match the device)
+    port=port,         # Replace with your port name (e.g., '/dev/ttyUSB0' on Linux)
+    baudrate=baudrate,       # Set the baud rate (must match the device)
     timeout=1            # Timeout in seconds for read operations
 )
 
@@ -16,7 +28,7 @@ location=["BACK", "RUA", "RLA", "LUA", "LLA"]
 idx =    [38, 51, 64, 77, 90]
 
 loc_idx = dict(zip(location, idx))
-LOCATION = loc_idx["RLA"]
+LOCATION = loc_idx[sensor_loc]
 accX =0 
 accX =1
 accY =2
